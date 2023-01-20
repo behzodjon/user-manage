@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
-    name: '',
+    userName: '',
     email: '',
     password: '',
   });
@@ -31,7 +31,7 @@ const Register = () => {
     <div className='auth'>
       <h1>Register</h1>
       <form>
-        <input required type='text' placeholder='name' name='name' onChange={handleChange} />
+        <input required type='text' placeholder='name' name='userName' onChange={handleChange} />
         <input required type='email' placeholder='email' name='email' onChange={handleChange} />
         <input required type='password' placeholder='password' name='password' onChange={handleChange} />
         <button onClick={handleSubmit}>Register</button>

@@ -1,65 +1,26 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Outlet,
-} from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Write from "./pages/Write";
-import Home from "./pages/Home";
-import Single from "./pages/Single";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import "./style.scss"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Navbar from './components/Navbar';
+import './style.scss';
+import './index.css';
 
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/post/:id",
-        element: <Single />,
-      },
-      {
-        path: "/write",
-        element: <Write />,
-      },
-    ],
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-]);
+import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
   return (
-    <div className="app">
-      <div className="container">
-        <RouterProvider router={router} />
-      </div>
+    <div className="App">
+        <Router>
+          <Routes>
+            <Route element={<PrivateRoutes />}>
+                <Route element={<Home/>} path="/" exact/>
+            </Route>
+            <Route element={<Login/>} path="/login"/>
+            <Route element={<Register/>} path="/register"/>
+          </Routes>
+      </Router>
     </div>
   );
 }
-
 export default App;

@@ -12,6 +12,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-quill": "^2.0.0",
+    "react-router": "^6.7.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "sass": "^1.55.0",
@@ -41,5 +42,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://user-manage.onrender.com/api/"
+  "proxy": "http://localhost:8080/api/",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
 }

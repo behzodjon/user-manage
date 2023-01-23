@@ -110,14 +110,14 @@ const index = (req, res) => {
     });
 };
 
-const block = async (req, res) => {
+const update = async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await User.findByPk(userId);
     if (!user) {
       res.status(404).send({ message: 'User not found' });
     } else {
-      await user.update({ status: 'blocked' });
+      await user.update(req.body);
       res.status(200).send({ message: 'User updated successfully' });
     }
   } catch (error) {
@@ -125,11 +125,13 @@ const block = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   signup,
   login,
   logout,
   index,
   destroy,
-  block,
+  update,
 };

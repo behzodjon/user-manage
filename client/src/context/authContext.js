@@ -9,13 +9,12 @@ export const AuthContexProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(JSON.parse(localStorage.getItem('user')) || false);
 
   const login = async (inputs) => {
-    console.log(inputs)
     const res = await axios.post('/auth/login', inputs);
     setCurrentUser(res.data);
     setAuthenticated(true);
   };
 
-  const logout = async (inputs) => {
+  const logout = async () => {
     await axios.post('/auth/logout');
     setCurrentUser(null);
     setAuthenticated(false);

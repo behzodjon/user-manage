@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Navbar from './components/Navbar';
-import './style.scss';
 import './index.css';
 
 import PrivateRoutes from './utils/PrivateRoutes'

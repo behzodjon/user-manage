@@ -41,11 +41,14 @@ const Home = () => {
   }, []);
 
   const handleDelete = async () => {
-    if (JSON.parse(localStorage.getItem('user')).status === 'blocked') {
+    if (!JSON.parse(localStorage.getItem('user')) || JSON.parse(localStorage.getItem('user')).status === 'blocked') {
       logout();
     }
     try {
       await Promise.all(selectedUsers.map((user) => axios.delete(`auth/users/${user.id}`)));
+      if (selectedUsers.find((user) => user.id === currentUser.id)) {
+        localStorage.setItem('user', null);
+      }
       setSelectedUsers(selectedUsers.filter((user) => !users.includes(user)));
       setUsers(users.filter((user) => !selectedUsers.includes(user)));
     } catch (error) {
@@ -54,7 +57,7 @@ const Home = () => {
   };
 
   const handleUpdate = async (val) => {
-    if (JSON.parse(localStorage.getItem('user')).status === 'blocked') {
+    if (!JSON.parse(localStorage.getItem('user')) || JSON.parse(localStorage.getItem('user')).status === 'blocked') {
       logout();
     }
     try {
@@ -185,7 +188,7 @@ const Home = () => {
                         </tr>
                       </thead>
                       <tbody className='divide-y divide-gray-200'>
-                        {users.map((user) => (
+                        {users.map((user, index) => (
                           <tr key={user.id} onClick={() => handleUserSelect(user)}>
                             <td className='py-3 pl-4'>
                               <div className='flex items-center h-5'>
@@ -198,7 +201,9 @@ const Home = () => {
                               </div>
                             </td>
 
-                            <td className='px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap'>{user.id}</td>
+                            <td className='px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap'>
+                              {index + 1}
+                            </td>
                             <td className='px-6 py-4 text-sm text-gray-800 whitespace-nowrap'>{user.userName}</td>
                             <td className='px-6 py-4 text-sm text-gray-800 whitespace-nowrap'>{user.email}</td>
                             <td className='px-6 py-4 text-sm text-gray-800 whitespace-nowrap'>{user.status}</td>
